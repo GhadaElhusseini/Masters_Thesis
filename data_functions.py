@@ -119,41 +119,15 @@ def load_TFP():
     Returns:
         pd.DataFrame: cleaned TFP data.
     """
-    df = pd.read_excel('/Users/ghadaelhusseini/Documents/Kassel University Masters /Thesis/my_Data/TFP_Data.xlsx')
+    df = pd.read_excel('/Users/ghadaelhusseini/Documents/Kassel University Masters /Thesis/my_Data/Penn_World.xlsx')
 
     # keep only the needed columns & format year column
 
-    columns_to_keep = ["country", "year", "v2x_regime", "rtfpna"]
+    columns_to_keep = ["country", "year", "hc", "rtfpna"]
     df = df[[col for col in columns_to_keep if col in df.columns]]
 
 
     return df
-
-
-def load_vdem_corr():
-    """
-    Loads Political Corruption index, Executive corruption index, Public sector corruption index  from the V_dem Database, v2x_corr, v2x_execorr, v2x_pubcorr
-    Parameters:
-        hard coded.
-
-    Returns:
-        pd.DataFrame: cleaned V_dem corruption data.
-    """
-    df = pd.read_csv('/Users/ghadaelhusseini/Documents/Kassel University Masters /Thesis/my_Data/V-Dem-CY-Full+Others-v15.csv')
-
-    # keep only the needed columns & format year column
-
-    df.rename(columns={"country_name": "country"}, inplace=True)
-    cols_to_keep = ["country", "year", "v2x_corr", "v2x_execorr", "v2x_pubcorr"]
-    df = df[cols_to_keep]
-
-
-    # Filter for years 1950–2022
-    df = df[(df["year"] >= 1950) & (df["year"] <= 2022)]
-
-
-    return df
-
 
 
 def load_vdem_corr():
@@ -267,5 +241,97 @@ def load_inf_mor():
     df= df[cols_to_keep]
 
     return df
+
+def load_hc():
+    """
+    Loads Human Capital data from the Penn World Tables, Human capital index, based on years of schooling and returns to education; see Human capital in PWT9.
+    Parameters:
+        hard coded.
+
+    Returns:
+        pd.DataFrame: cleaned TFP data.
+    """
+    df = pd.read_excel('/Users/ghadaelhusseini/Documents/Kassel University Masters /Thesis/my_Data/Penn_World.xlsx')
+
+    # keep only the needed columns & format year column
+
+    columns_to_keep = ["country", "year", "hc"]
+    df = df[[col for col in columns_to_keep if col in df.columns]]
+
+
+    return df
+
+def load_gov_exp():
+    """
+        Loads 	General government final consumption expenditure (% of GDP) - WDI .
+
+        Parameters:
+            hard coded
+
+        Returns:
+            pd.DataFrame:
+        """
+    df = pd.read_csv('/Users/ghadaelhusseini/Documents/Kassel University Masters /Thesis/my_Data/Gov_exp.csv')
+
+    year_cols = [f"{y} [YR{y}]" for y in range(1960, 2023)]
+    df = df[['Country Name', 'Series Name'] + year_cols]
+
+    df = df.melt(
+        id_vars=['Country Name', 'Series Name'],
+        var_name='year',
+        value_name='Value'
+    )
+
+    # Clean up year column
+    df['year'] = df['year'].str.extract(r'(\d{4})').astype(int)
+
+    df = df.rename(columns={
+        "Country Name": "country",
+    })
+
+    #  Keeping only relevant columns: COUNTRY, INDICATOR, years
+    cols_to_keep = ["country", "year", "Value"]
+    df= df[cols_to_keep]
+    df.rename(columns={"Value": "General government final consumption expenditure (% of GDP)"}, inplace=True)
+
+
+    return df
+
+
+def load_tax_rev():
+    """
+        Loads Tax revenue (% of GDP) - WDI .
+
+        Parameters:
+            hard coded
+
+        Returns:
+            pd.DataFrame:
+        """
+    df = pd.read_csv('/Users/ghadaelhusseini/Documents/Kassel University Masters /Thesis/my_Data/tax_rev.csv')
+
+    year_cols = [f"{y} [YR{y}]" for y in range(1960, 2023)]
+    df = df[['Country Name', 'Series Name'] + year_cols]
+
+    df = df.melt(
+        id_vars=['Country Name', 'Series Name'],
+        var_name='year',
+        value_name='Value'
+    )
+
+    # Clean up year column
+    df['year'] = df['year'].str.extract(r'(\d{4})').astype(int)
+
+    df = df.rename(columns={
+        "Country Name": "country",
+    })
+
+    #  Keeping only relevant columns: COUNTRY, INDICATOR, years
+    cols_to_keep = ["country", "year", "Value"]
+    df= df[cols_to_keep]
+    df.rename(columns={"Value": "Tax revenue (% of GDP)"}, inplace=True)
+
+    return df
+
 
 
