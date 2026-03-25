@@ -1,0 +1,323 @@
+
+
+
+====================================================================================================
+Modified Causal Forest: Training 
+----------------------------------------------------------------------------------------------------
+
+====================================================================================================
+Common support analysis
+
+Treatment sample     Treatment probabilities in %
+--------------------- Upper limits ----------------
+D =         0          100.00%   92.98%  
+D =         1          100.00%  100.00%  
+--------------------- Lower limits ----------------
+D =         0            0.00%    0.16%  
+D =         1            0.00%    7.94%  
+----------------------------------------------------------------------------------------------------
+First treatment is set to 1 and 0 (ignored) due to additivity.
+----------------------------------------------------------------------------------------------------
+Upper limits used: 100.00%  92.98%
+Lower limits used:   0.00%   7.94%
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Data investigated for common support: Training - fill mcf with y data
+----------------------------------------------------------------------------------------------------
+Observations deleted:  822 (37.36%)
+----------------------------------------------------------------------------------------------------
+
+Observations kept, by treatment
+                      Obs.  Share in %
+binary_democracy                  
+0                  815       59.14
+1                  563       40.86
+-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   
+Observations deleted, by treatment
+                   Obs.  Share in %
+binary_democracy                  
+0                  409       49.76
+1                  413       50.24
+
+----------------------------------------------------------------------------------------------------
+Data investigated for common support: Training - build mcf data
+----------------------------------------------------------------------------------------------------
+Observations deleted:  855 (38.86%)
+----------------------------------------------------------------------------------------------------
+
+Observations kept, by treatment
+                      Obs.  Share in %
+binary_democracy                  
+0                  735       54.65
+1                  610       45.35
+-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   
+Observations deleted, by treatment
+                   Obs.  Share in %
+binary_democracy                  
+0                  437       51.11
+1                  418       48.89
+
+------------- Statistics by treatment status ------------------
+Number of observations:
+binary_democracy     0     1
+log_gdppc         1550  1173
+
+Mean
+binary_democracy         0         1
+log_gdppc         8.214990  8.904024
+region_num        4.285161  4.078431
+
+====================================================================================================
+Balancing tests (descriptive)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Comparing treatments  1 and  0
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+log_gdppc                         0.68903   0.03540     19.46     0.00     74.93
+region_num                       -0.20673   0.06225      3.32     0.09    -12.84
+====================================================================================================
+Local Centering  
+
+----------------------------------------------------------------------------------------------------
+Fit of Ey|x for local centering (Best method: Random Forest). R2 for log_gdppc: 84.35% 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+New variable to build trees in RF:  log_gdppc_lc
+
+Computing prognostic score for matching
+
+Matched outcomes
+
+Short info on data used:
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 1345 entries, 0 to 1344
+Data columns (total 2 columns):
+ #   Column             Non-Null Count  Dtype  
+---  ------             --------------  -----  
+ 0   log_gdppc_lc_NN_0  1345 non-null   float32
+ 1   log_gdppc_lc_NN_1  1345 non-null   float32
+dtypes: float32(2)
+memory usage: 10.6 KB
+
+       log_gdppc_lc_NN_0  log_gdppc_lc_NN_1
+count        1345.000000        1345.000000
+mean           -0.134848           0.112130
+std             0.452551           0.375739
+min            -1.561843          -1.136953
+25%            -0.335184          -0.075765
+50%            -0.097413           0.087508
+75%             0.096009           0.321777
+max             2.536560           1.643427
+
+Statistics on matched neighbours of variable used for tree building
+
+----------------------------------------------------------------------------------------------------
+Parameters of estimation to build random forest
+Outcome variable used to build forest: log_gdppc_lc
+Features used to build forest:          fe_etfra export_share population growth rate - sex: all - age: all - variant: estimates gross capital formation (% of gdp) general government final consumption expenditure (% of gdp) region_num_prime
+Variables always included in splitting: 
+Number of replications:     1000
+Splitting rule used:        MSE+MCE criterion
+Penalty used in splitting:  0.1379708157902042 Penalty method: MSE of treatment prediction 
+Share of data in subsample for forest building: 0.6288767502925228
+Share of data in subsample for forest evaluation: 1   
+Total number of variables available for splitting: 6   
+# of variables (M) used for split: 2   
+           (# of variables drawn from 1+Poisson(M-1))
+Minimum threshold for using Poisson: 10
+Minimum leaf size:                 4   
+Alpha regularity:                  0.100
+------------------- Estimated trees ----------------------------
+Average # of leaves:                      115.3
+Average size of leaves:                    7.4
+Median size of leaves:                     6.0
+Min size of leaves:                          4
+Max size of leaves:                         58
+Average # of obs in leaves (single tree):  846
+----------------------------------------------------------------------------------------------------
+
+Share of merged leaves (w/o all treatments per tree): 13.637%
+Share of leaves w/o all treatments per tree (after merger): 0.170%
+Incomplete leafs will not be considered for weight computation.
+----------------------------------------------------------------------------------------------------
+Size of forest: 36.57 MB
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Training executed at: 2026-03-24 13:25:31.055707
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Data preparation and stats I:                    0:00:00.102174
+Feature preselection:                            0:00:00.016327
+Common support:                                  0:00:06.874379
+Local centering (recoding of Y):                 0:00:04.158926
+Training the causal forest:                      0:02:11.402688
+  ... of which is time for variable importance:  0:00:00
+
+Total time training:                             0:02:22.554494
+
+====================================================================================================
+Modified Causal Forest: Prediction 
+----------------------------------------------------------------------------------------------------
+
+====================================================================================================
+Common support analysis
+
+----------------------------------------------------------------------------------------------------
+Data investigated for common support: Prediction data
+----------------------------------------------------------------------------------------------------
+Observations deleted:  521 (35.61%)
+----------------------------------------------------------------------------------------------------
+
+Observations kept, by treatment
+                      Obs.  Share in %
+binary_democracy                  
+0                  441       46.82
+1                  501       53.18
+-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   
+Observations deleted, by treatment
+                   Obs.  Share in %
+binary_democracy                  
+0                  197       37.81
+1                  324       62.19
+
+------------- Statistics by treatment status ------------------
+Number of observations:
+binary_democracy    0    1
+fe_etfra          441  501
+
+Mean
+binary_democracy                                            0          1
+fe_etfra                                             0.474129   0.434371
+export_share                                         0.404731   0.403743
+population growth rate - sex: all - age: all - ...   1.607796   0.889172
+gross capital formation (% of gdp)                  26.095810  23.813281
+general government final consumption expenditur...  15.132215  16.029229
+region_num                                           4.054422   4.127745
+
+====================================================================================================
+Balancing tests (descriptive)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Comparing treatments  1 and  0
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+fe_etfra                         -0.03976   0.01557      2.55     1.06    -16.66
+export_share                     -0.00099   0.00889      0.11    91.15     -0.73
+population growth rate - sex: all - age: all - variant: estimates   -0.71862   0.11429      6.29     0.00    -41.71
+gross capital formation (% of gdp)   -2.28253   0.51873      4.40     0.00    -29.01
+general government final consumption expenditure (% of gdp)    0.89701   0.41994      2.14     3.27     14.06
+region_num                        0.07332   0.10805      0.68    49.74      4.44
+====================================================================================================
+Local Centering  
+
+
+====================================================================================================
+Average Treatment Effects Estimation 
+----------------------------------------------------------------------------------------------------
+Potential outcomes
+----------------------------------------------------------------------------------------------------
+Outcome variable: log_gdppc_lc    Reference population: All
+Treatment  Potential Outcome  SE of PO       Uncentered Outcome
+0             -0.131684       0.018520           8.558994
+1              0.104835       0.020891           8.795514
+----------------------------------------------------------------------------------------------------
+Treatment effects (ATE, ATETs)
+----------------------------------------------------------------------------------------------------
+Outcome variable: log_gdppc_lc   Reference population: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Comparison                Estimate   Standard error t-value   p-value
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+1         vs         0     0.236519      0.027918     8.47    0.000% ****
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+----------------------------------------------------------------------------------------------------
+Outcome variable: log_gdppc_lc      Reference population: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Group Average Treatment Effects (GATE)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Heterogeneity: region_num Outcome: log_gdppc_lc Ref. pop.: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                   GATE                                GATE - ATE
+Comparison      Z      Est         SE  t-val   p-val         Est        SE  t-val   p-val
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+1   vs   0      0   0.36383    0.07688  4.73   0.00%****  0.12731    0.07270  1.75   7.99%   *   
+1   vs   0      1   0.07445    0.05014  1.48  13.76%     -0.16207    0.03979  4.07   0.00%****   
+1   vs   0      2   0.28928    0.05166  5.60   0.00%****  0.05276    0.03984  1.32  18.55%       
+1   vs   0      3   0.23046    0.03067  7.51   0.00%**** -0.00606    0.02517  0.24  80.98%       
+1   vs   0      4   0.25172    0.05228  4.81   0.00%****  0.01520    0.04178  0.36  71.60%       
+1   vs   0      5   0.25175    0.03999  6.30   0.00%****  0.01523    0.03230  0.47  63.74%       
+1   vs   0      6   0.45518    0.09866  4.61   0.00%****  0.21866    0.08679  2.52   1.18%  **   
+1   vs   0      7   0.50802    0.09598  5.29   0.00%****  0.27150    0.08993  3.02   0.25% ***   
+----------------------------------------------------------------------------------------------------
+Shown values of Z may represent the order of the values (starting with 0) instead of the original values.
+----------------------------------------------------------------------------------------------------
+Bootstrap replications: 500
+----------------------------------------------------------------------------------------------------Weights used for comparison with ATE are not truncated. Therefore, GATEs - ATE may not aggregate to 0.
+----------------------------------------------------------------------------------------------------
+
+====================================================================================================
+Descriptives for IATE estimation 
+----------------------------------------------------------------------------------------------------
+Effect: IATE
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Outcome variable: log_gdppc
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Comparison        Mean       Median           Std    Effect > 0  mean(SE)  sig 10%   sig 5%   sig 1%
+1    vs    0      0.23446      0.22283      0.12462  97.45%      0.07612   85.14%   79.72%   64.76%
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Weights used for comparison with ATE are not truncated. Therefore, IATEs - ATE may not aggregate to 0.
+----------------------------------------------------------------------------------------------------
+
+Individualized ATE 
+
+Short info on data used:
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 942 entries, 0 to 941
+Data columns (total 8 columns):
+ #   Column                    Non-Null Count  Dtype  
+---  ------                    --------------  -----  
+ 0   log_gdppc_lc0_pot         942 non-null    float64
+ 1   log_gdppc_lc1_pot         942 non-null    float64
+ 2   log_gdppc_lc0_pot_se      942 non-null    float64
+ 3   log_gdppc_lc1_pot_se      942 non-null    float64
+ 4   log_gdppc_lc1vs0_iate     942 non-null    float64
+ 5   log_gdppc_lc1vs0_iate_se  942 non-null    float64
+ 6   log_gdppc_lc0_un_lc_pot   942 non-null    float64
+ 7   log_gdppc_lc1_un_lc_pot   942 non-null    float64
+dtypes: float64(8)
+memory usage: 59.0 KB
+
+                          count      mean       std       min       25%       50%       75%        max
+log_gdppc_lc0_pot         942.0 -0.129737  0.084282 -0.431267 -0.184488 -0.132520 -0.086011   0.232303
+log_gdppc_lc1_pot         942.0  0.104720  0.110446 -0.078207  0.021587  0.087296  0.173455   0.473913
+log_gdppc_lc0_pot_se      942.0  0.053813  0.018357  0.021300  0.038827  0.051739  0.066764   0.111881
+log_gdppc_lc1_pot_se      942.0  0.051621  0.016862  0.016063  0.040257  0.049473  0.061997   0.139900
+log_gdppc_lc1vs0_iate     942.0  0.234457  0.124683 -0.192583  0.154905  0.222830  0.322041   0.578101
+log_gdppc_lc1vs0_iate_se  942.0  0.076123  0.019670  0.030551  0.060397  0.073919  0.088343   0.166556
+log_gdppc_lc0_un_lc_pot   942.0  8.560942  0.789913  6.831022  7.896246  8.669829  9.178144  10.493012
+log_gdppc_lc1_un_lc_pot   942.0  8.795399  0.811787  7.122077  8.131300  8.934095  9.403860  10.543155
+
+----------------------------------------------------------------------------------------------------
+Prediction executed at: 2026-03-24 13:26:03.328837
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Data preparation and stats II:                   0:00:00.045175
+Common support:                                  0:00:00.375709
+Local centering (recoding of Y):                 0:00:00.687224
+Weights:                                         0:00:29.573508
+ATEs:                                            0:00:00.195865
+GATEs:                                           0:00:00.649076
+BGATEs:                                          0:00:00.000001
+CBGATEs:                                         0:00:00
+QIATEs:                                          0:00:00
+IATEs:                                           0:00:00.744157
+Balancing test:                                  0:00:00.000001
+
+Total time prediction:                           0:00:32.270779
+
+====================================================================================================
+Modified Causal Forest: Training 
+----------------------------------------------------------------------------------------------------

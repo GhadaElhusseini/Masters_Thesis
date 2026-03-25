@@ -1,0 +1,4 @@
+Comparison,Chi2,df,p-value (%)
+"Closed autocracy transitions (0,1,2)",56.852,2,0.0
+"Electoral autocracy transitions (3,4)",43.315,1,0.0
+All transitions (0-5),138.569,5,0.0

@@ -9,18 +9,21 @@ def load_vdem():
         pd.DataFrame: cleaned V-Dem dataframe.
     """
     # Load CSV (hardcoded path)
-    df_aggregate = pd.read_csv(
+    df = pd.read_csv(
         "/Users/ghadaelhusseini/Documents/Kassel University Masters /Thesis/my_Data/V-Dem-CY-Core-v15.csv"
     )
 
     # Keep only important columns
     columns_to_keep = ["country_name", "year", "v2x_regime", "v2x_polyarchy", "v2x_liberal"]
-    v_dem_df = df_aggregate[[col for col in columns_to_keep if col in df_aggregate.columns]]
+    df = df[[col for col in columns_to_keep if col in df.columns]]
+    df.rename(columns={"country_name": "country"}, inplace=True)
+    df = df[(df['year'] >= 1950) & (df['year'] <= 2023)]
+
 
     # Optional: drop missing rows
     # v_dem_df = v_dem_df.dropna(subset=["country_name", "year", "v2x_regime"])
 
-    return v_dem_df
+    return df
 
 
 def load_maddison():
@@ -33,7 +36,8 @@ def load_maddison():
     Returns:
         pd.DataFrame: cleaned Maddison dataframe.
     """
-    df = pd.read_excel('/Users/ghadaelhusseini/Documents/Kassel University Masters /Thesis/my_Data/mpd2023_web.xlsx')
+    df = pd.read_csv('/Users/ghadaelhusseini/PyCharmMiscProject/Standardized Country names/maddison_df.csv')
+    df = df[(df['year'] >= 1950) & (df['year'] <= 2023)]
 
     # Keep only important columns
     #important_cols = ["country_name", "year", "gdp_per_capita", "population"]
@@ -210,7 +214,7 @@ def load_lag_gdppc():
 
 def load_inf_mor():
     """
-        Loads infant mortality data from the World Bank WDI .
+        Loads Mortality rate, infant (per 1,000 live births) from the World Bank WDI .
 
         Parameters:
             hard coded
@@ -239,6 +243,10 @@ def load_inf_mor():
     #  Keeping only relevant columns: COUNTRY, INDICATOR, years
     cols_to_keep = ["country", "year", "Value"]
     df= df[cols_to_keep]
+    df.rename(columns={"Value": "Mortality rate, infant (per 1,000 live births)"}, inplace=True)
+
+    df = df.dropna(subset=["country"])
+
 
     return df
 
@@ -263,7 +271,7 @@ def load_hc():
 
 def load_gov_exp():
     """
-        Loads 	General government final consumption expenditure (% of GDP) - WDI .
+        Loads General government final consumption expenditure (% of GDP) - WDI .
 
         Parameters:
             hard coded
@@ -294,6 +302,7 @@ def load_gov_exp():
     df= df[cols_to_keep]
     df.rename(columns={"Value": "General government final consumption expenditure (% of GDP)"}, inplace=True)
 
+    df = df.dropna(subset=["country"])
 
     return df
 
@@ -330,8 +339,70 @@ def load_tax_rev():
     cols_to_keep = ["country", "year", "Value"]
     df= df[cols_to_keep]
     df.rename(columns={"Value": "Tax revenue (% of GDP)"}, inplace=True)
+    df = df.dropna(subset=["country"])
 
     return df
 
 
 
+def load_capital_for():
+    """
+        Loads Capital Formation (% of GDP) - WDI .
+
+        Parameters:
+            hard coded
+
+        Returns:
+            pd.DataFrame:
+        """
+
+    gross_cap_for_df = pd.read_excel('/Users/ghadaelhusseini/Documents/Kassel University Masters /Thesis/my_Data/CAP_formation.xlsx')
+
+    # Convert all column names to string
+    gross_cap_for_df.columns = gross_cap_for_df.columns.map(str)
+
+    # 1. Identify year columns
+    year_cols = [col for col in gross_cap_for_df.columns if col.isdigit()]
+
+    # 2. Melt
+    gross_cap_for_df = gross_cap_for_df.melt(
+        id_vars=['Country Name', 'Indicator Name'],
+        value_vars=year_cols,
+        var_name='year',
+        value_name='Value'
+    )
+
+    # 3. Rename columns
+    gross_cap_for_df = gross_cap_for_df.rename(columns={
+        "Country Name": "country",
+        "Indicator Name": "indicator"
+    })
+
+    # 4. Keep only needed columns
+    gross_cap_for_df = gross_cap_for_df[["country", "indicator", "year", "Value"]]
+
+    # 5. Optional — rename Value
+    gross_cap_for_df = gross_cap_for_df.rename(
+        columns={"Value": "Gross capital formation (% of GDP)"}
+    )
+
+
+
+def load_MYS():
+    """
+    Loads Mean Years of Schooling, proxy for Human capital index, based on years of schooling and returns to education; from our world in data
+    Parameters:
+        hard coded.
+
+    Returns:
+        pd.DataFrame: cleaned TFP data.
+    """
+    df = pd.read_excel('/Users/ghadaelhusseini/Downloads/average-years-of-schooling/average-years-of-schooling.csv')
+
+    # keep only the needed columns & format year column
+
+    columns_to_keep = ["country", "year", "hc"]
+    df = df[[col for col in columns_to_keep if col in df.columns]]
+
+
+    return df

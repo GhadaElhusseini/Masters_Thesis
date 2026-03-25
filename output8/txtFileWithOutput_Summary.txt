@@ -1,0 +1,499 @@
+
+
+
+====================================================================================================
+Modified Causal Forest: Training 
+----------------------------------------------------------------------------------------------------
+
+====================================================================================================
+Common support analysis
+
+----------------------------------------------------------------------------------------------------
+Common support bounds adjusted by 10.00%-points
+----------------------------------------------------------------------------------------------------
+Treatment sample     Treatment probabilities in %
+--------------------- Upper limits ----------------
+D =         0          100.00%  100.00%   76.73%   77.16%  
+D =         1          100.00%  100.00%   87.36%   79.22%  
+D =         2          100.00%   89.59%  100.00%  100.00%  
+D =         3          100.00%   67.65%   85.58%  100.00%  
+--------------------- Lower limits ----------------
+D =         0            0.00%    0.65%    0.00%    0.00%  
+D =         1            0.00%    0.79%    0.13%    0.00%  
+D =         2            0.00%    0.84%    2.79%    0.00%  
+D =         3            0.00%    0.00%    0.00%    2.00%  
+----------------------------------------------------------------------------------------------------
+First treatment is set to 1 and 0 (ignored) due to additivity.
+----------------------------------------------------------------------------------------------------
+Upper limits used: 100.00%  67.65%  76.73%  77.16%
+Lower limits used:   0.00%   0.84%   2.79%   2.00%
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Data investigated for common support: Training - fill mcf with y data
+----------------------------------------------------------------------------------------------------
+Observations deleted: 1545 (70.23%)
+----------------------------------------------------------------------------------------------------
+
+Observations kept, by treatment
+                Obs.  Share in %
+v2x_regime                  
+0.0          179       27.33
+1.0          166       25.34
+2.0          184       28.09
+3.0          126       19.24
+-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   
+Observations deleted, by treatment
+             Obs.  Share in %
+v2x_regime                  
+0.0          308       19.94
+1.0          571       36.96
+2.0          252       16.31
+3.0          414       26.80
+
+----------------------------------------------------------------------------------------------------
+Data investigated for common support: Training - build mcf data
+----------------------------------------------------------------------------------------------------
+Observations deleted: 1592 (72.36%)
+----------------------------------------------------------------------------------------------------
+
+Observations kept, by treatment
+                Obs.  Share in %
+v2x_regime                  
+0.0          151       24.84
+1.0          148       24.34
+2.0          195       32.07
+3.0          114       18.75
+-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   
+Observations deleted, by treatment
+             Obs.  Share in %
+v2x_regime                  
+0.0          300       18.84
+1.0          573       35.99
+2.0          291       18.28
+3.0          428       26.88
+
+------------- Statistics by treatment status ------------------
+Number of observations:
+v2x_regime  0.0  1.0  2.0  3.0
+log_gdppc   330  314  379  240
+
+Mean
+v2x_regime       0.0       1.0       2.0       3.0
+log_gdppc   8.410286  8.203799  8.903485  9.565211
+region_num  4.612121  4.308917  4.063325  4.450000
+
+====================================================================================================
+Balancing tests (descriptive)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Comparing treatments  3 and  2
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+log_gdppc                         0.66173   0.04791     13.81     0.00    111.01
+region_num                        0.38668   0.14137      2.74     0.62     23.03
+
+Comparing treatments  3 and  1
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+log_gdppc                         1.36141   0.05745     23.70     0.00    197.36
+region_num                        0.14108   0.14759      0.96    33.91      8.28
+
+Comparing treatments  3 and  0
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+log_gdppc                         1.15493   0.06837     16.89     0.00    136.14
+region_num                       -0.16212   0.14977      1.08    27.91     -9.25
+
+Comparing treatments  2 and  1
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+log_gdppc                         0.69969   0.05749     12.17     0.00     93.82
+region_num                       -0.24559   0.11787      2.08     3.72    -15.93
+
+Comparing treatments  2 and  0
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+log_gdppc                         0.49320   0.06839      7.21     0.00     55.14
+region_num                       -0.54880   0.12060      4.55     0.00    -34.38
+
+Comparing treatments  1 and  0
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+log_gdppc                        -0.20649   0.07539      2.74     0.62    -21.52
+region_num                       -0.30320   0.12783      2.37     1.77    -18.68
+====================================================================================================
+Local Centering  
+
+----------------------------------------------------------------------------------------------------
+Fit of Ey|x for local centering (Best method: Random Forest). R2 for log_gdppc: 75.49% 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+New variable to build trees in RF:  log_gdppc_lc
+
+Computing prognostic score for matching
+
+Matched outcomes
+
+Short info on data used:
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 608 entries, 0 to 607
+Data columns (total 4 columns):
+ #   Column             Non-Null Count  Dtype  
+---  ------             --------------  -----  
+ 0   log_gdppc_lc_NN_0  608 non-null    float32
+ 1   log_gdppc_lc_NN_1  608 non-null    float32
+ 2   log_gdppc_lc_NN_2  608 non-null    float32
+ 3   log_gdppc_lc_NN_3  608 non-null    float32
+dtypes: float32(4)
+memory usage: 9.6 KB
+
+       log_gdppc_lc_NN_0  log_gdppc_lc_NN_1  log_gdppc_lc_NN_2  log_gdppc_lc_NN_3
+count         608.000000         608.000000         608.000000         608.000000
+mean           -0.140783          -0.292978          -0.005611           0.379394
+std             0.372194           0.374684           0.328500           0.252088
+min            -1.380500          -1.367407          -1.131751          -0.191951
+25%            -0.333868          -0.531649          -0.181482           0.221180
+50%            -0.172266          -0.231374          -0.014313           0.313938
+75%             0.010609          -0.028331           0.153747           0.512312
+max             1.571324           1.129465           0.992606           1.345200
+
+Statistics on matched neighbours of variable used for tree building
+
+----------------------------------------------------------------------------------------------------
+Parameters of estimation to build random forest
+Outcome variable used to build forest: log_gdppc_lc
+Features used to build forest:          fe_etfra export_share population growth rate - sex: all - age: all - variant: estimates gross capital formation (% of gdp) general government final consumption expenditure (% of gdp) region_num_prime
+Variables always included in splitting: 
+Number of replications:     1000
+Splitting rule used:        MSE+MCE criterion
+Penalty used in splitting:  0.45376489247798013 Penalty method: MSE of treatment prediction 
+Share of data in subsample for forest building: 0.6288767502925228
+Share of data in subsample for forest evaluation: 1   
+Total number of variables available for splitting: 6   
+# of variables (M) used for split: 2   
+           (# of variables drawn from 1+Poisson(M-1))
+Minimum threshold for using Poisson: 10
+Minimum leaf size:                 7   
+Alpha regularity:                  0.100
+------------------- Estimated trees ----------------------------
+Average # of leaves:                      23.3
+Average size of leaves:                   16.6
+Median size of leaves:                    14.0
+Min size of leaves:                          7
+Max size of leaves:                         76
+Average # of obs in leaves (single tree):  382
+----------------------------------------------------------------------------------------------------
+
+Share of merged leaves (w/o all treatments per tree): 15.823%
+Share of leaves w/o all treatments per tree (after merger): 0.855%
+Incomplete leafs will not be considered for weight computation.
+----------------------------------------------------------------------------------------------------
+Size of forest: 10.84 MB
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Training executed at: 2026-03-24 12:25:24.929107
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Data preparation and stats I:                    0:00:00.066726
+Feature preselection:                            0:00:00.010326
+Common support:                                  0:00:08.674130
+Local centering (recoding of Y):                 0:00:03.507760
+Training the causal forest:                      0:00:29.968353
+  ... of which is time for variable importance:  0:00:00
+
+Total time training:                             0:00:42.227295
+
+====================================================================================================
+Modified Causal Forest: Prediction 
+----------------------------------------------------------------------------------------------------
+
+====================================================================================================
+Common support analysis
+
+----------------------------------------------------------------------------------------------------
+Data investigated for common support: Prediction data
+----------------------------------------------------------------------------------------------------
+Observations deleted:  862 (58.92%)
+----------------------------------------------------------------------------------------------------
+
+Observations kept, by treatment
+                Obs.  Share in %
+v2x_regime                  
+0.0           53        8.82
+1.0          192       31.95
+2.0          260       43.26
+3.0           96       15.97
+-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   
+Observations deleted, by treatment
+             Obs.  Share in %
+v2x_regime                  
+0.0          129       14.97
+1.0          264       30.63
+2.0          150       17.40
+3.0          319       37.01
+
+------------- Statistics by treatment status ------------------
+Number of observations:
+v2x_regime  0.0  1.0  2.0  3.0
+fe_etfra     53  192  260   96
+
+Mean
+v2x_regime                                                0.0        1.0        2.0        3.0
+fe_etfra                                             0.325513   0.480414   0.479902   0.366325
+export_share                                         0.469779   0.387750   0.393465   0.451428
+population growth rate - sex: all - age: all - ...   1.248962   1.325531   0.802277   0.719646
+gross capital formation (% of gdp)                  27.349717  26.914742  23.721113  23.309440
+general government final consumption expenditur...  21.939230  15.202056  15.218526  17.981914
+region_num                                           3.716981   4.630208   4.000000   4.395833
+
+====================================================================================================
+Balancing tests (descriptive)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Comparing treatments  3 and  2
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+fe_etfra                         -0.11358   0.02203      5.15     0.00    -56.00
+export_share                      0.05796   0.01136      5.10     0.00     55.46
+population growth rate - sex: all - age: all - variant: estimates   -0.08263   0.11950      0.69    48.93     -7.65
+gross capital formation (% of gdp)   -0.41167   0.62398      0.66    50.94     -7.15
+general government final consumption expenditure (% of gdp)    2.76339   0.61646      4.48     0.00     52.47
+region_num                        0.39583   0.19669      2.01     4.42     25.11
+
+Comparing treatments  3 and  1
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+fe_etfra                         -0.11409   0.02397      4.76     0.00    -55.47
+export_share                      0.06368   0.01318      4.83     0.00     55.33
+population growth rate - sex: all - age: all - variant: estimates   -0.60589   0.15065      4.02     0.01    -45.48
+gross capital formation (% of gdp)   -3.60530   0.86557      4.17     0.00    -45.91
+general government final consumption expenditure (% of gdp)    2.77986   0.62993      4.41     0.00     55.15
+region_num                       -0.23438   0.20215      1.16    24.63    -15.02
+
+Comparing treatments  3 and  0
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+fe_etfra                          0.04081   0.03042      1.34    17.97     23.45
+export_share                     -0.01835   0.02073      0.89    37.61    -16.14
+population growth rate - sex: all - age: all - variant: estimates   -0.52932   0.19077      2.77     0.55    -49.46
+gross capital formation (% of gdp)   -4.04028   1.43714      2.81     0.49    -52.46
+general government final consumption expenditure (% of gdp)   -3.95732   1.59047      2.49     1.28    -46.41
+region_num                        0.67885   0.29526      2.30     2.15     39.34
+
+Comparing treatments  2 and  1
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+fe_etfra                         -0.00051   0.02289      0.02    98.22     -0.21
+export_share                      0.00571   0.01264      0.45    65.12      4.35
+population growth rate - sex: all - age: all - variant: estimates   -0.52325   0.14194      3.69     0.02    -35.82
+gross capital formation (% of gdp)   -3.19363   0.84360      3.79     0.02    -37.05
+general government final consumption expenditure (% of gdp)    0.01647   0.49838      0.03    97.36      0.31
+region_num                       -0.63021   0.13229      4.76     0.00    -45.24
+
+Comparing treatments  2 and  0
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+fe_etfra                          0.15439   0.02957      5.22     0.00     72.24
+export_share                     -0.07631   0.02039      3.74     0.02    -58.56
+population growth rate - sex: all - age: all - variant: estimates   -0.44669   0.18396      2.43     1.52    -36.42
+gross capital formation (% of gdp)   -3.62860   1.42402      2.55     1.08    -42.78
+general government final consumption expenditure (% of gdp)   -6.72070   1.54310      4.36     0.00    -77.56
+region_num                        0.28302   0.25262      1.12    26.26     17.96
+
+Comparing treatments  1 and  0
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+fe_etfra                          0.15490   0.03104      4.99     0.00     71.57
+export_share                     -0.08203   0.02146      3.82     0.01    -59.04
+population growth rate - sex: all - age: all - variant: estimates    0.07657   0.20556      0.37    70.95      5.27
+gross capital formation (% of gdp)   -0.43497   1.54522      0.28    77.83     -4.34
+general government final consumption expenditure (% of gdp)   -6.73717   1.54853      4.35     0.00    -78.98
+region_num                        0.91323   0.25688      3.56     0.04     58.55
+====================================================================================================
+Local Centering  
+
+
+====================================================================================================
+Average Treatment Effects Estimation 
+----------------------------------------------------------------------------------------------------
+Potential outcomes
+----------------------------------------------------------------------------------------------------
+Outcome variable: log_gdppc_lc    Reference population: All
+Treatment  Potential Outcome  SE of PO       Uncentered Outcome
+0             -0.087745       0.044319           8.649962
+1             -0.203639       0.028864           8.534068
+2             -0.024955       0.026605           8.712752
+3              0.368608       0.034667           9.106315
+----------------------------------------------------------------------------------------------------
+Treatment effects (ATE, ATETs)
+----------------------------------------------------------------------------------------------------
+Outcome variable: log_gdppc_lc   Reference population: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Comparison                Estimate   Standard error t-value   p-value
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+1         vs         0    -0.115894      0.052889     2.19    2.843%   **
+2         vs         0     0.062790      0.051691     1.21   22.448% 
+3         vs         0     0.456353      0.056267     8.11    0.000% ****
+2         vs         1     0.178684      0.039255     4.55    0.001% ****
+3         vs         1     0.572247      0.045110    12.69    0.000% ****
+3         vs         2     0.393563      0.043700     9.01    0.000% ****
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+----------------------------------------------------------------------------------------------------
+Outcome variable: log_gdppc_lc      Reference population: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Group Average Treatment Effects (GATE)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Heterogeneity: region_num Outcome: log_gdppc_lc Ref. pop.: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                   GATE                                GATE - ATE
+Comparison      Z      Est         SE  t-val   p-val         Est        SE  t-val   p-val
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+1   vs   0      0   0.00871    0.07899  0.11  91.22%      0.12460    0.06683  1.86   6.23%   *   
+1   vs   0      1  -0.02343    0.07423  0.32  75.22%      0.09246    0.05132  1.80   7.16%   *   
+1   vs   0      2  -0.15788    0.10882  1.45  14.68%     -0.04152    0.07146  0.58  56.13%       
+1   vs   0      3  -0.10153    0.05011  2.03   4.28%  **  0.01436    0.03940  0.36  71.55%       
+1   vs   0      4  -0.25857    0.10988  2.35   1.86%  ** -0.14345    0.07893  1.82   6.91%   *   
+1   vs   0      5  -0.07189    0.05576  1.29  19.73%      0.04400    0.04872  0.90  36.64%       
+1   vs   0      6  -0.06437    0.05150  1.25  21.13%      0.05501    0.03958  1.39  16.46%       
+1   vs   0      7  -0.27148    0.10151  2.67   0.75% *** -0.15696    0.08035  1.95   5.08%   *   
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+2   vs   0      0   0.16691    0.08693  1.92   5.48%   *  0.11634    0.07785  1.49  13.51%       
+2   vs   0      1   0.12590    0.06364  1.98   4.79%  **  0.05085    0.04843  1.05  29.37%       
+2   vs   0      2  -0.00896    0.10877  0.08  93.43%     -0.07128    0.07327  0.97  33.07%       
+2   vs   0      3   0.10862    0.04222  2.57   1.01%  **  0.04583    0.03892  1.18  23.90%       
+2   vs   0      4  -0.10910    0.10157  1.07  28.27%     -0.15016    0.07662  1.96   5.00%   *   
+2   vs   0      5   0.11922    0.06710  1.78   7.56%   *  0.05643    0.05281  1.07  28.53%       
+2   vs   0      6   0.09928    0.04745  2.09   3.64%  **  0.03649    0.04228  0.86  38.82%       
+2   vs   0      7  -0.07230    0.09228  0.78  43.33%     -0.09759    0.08971  1.09  27.66%       
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+3   vs   0      0   0.61353    0.09792  6.27   0.00%****  0.15698    0.08790  1.79   7.41%   *   
+3   vs   0      1   0.54802    0.07063  7.76   0.00%****  0.09167    0.05121  1.79   7.35%   *   
+3   vs   0      2   0.37383    0.10555  3.54   0.04%**** -0.08206    0.07522  1.09  27.53%       
+3   vs   0      3   0.34065    0.03848  8.85   0.00%**** -0.11570    0.04217  2.74   0.61% ***   
+3   vs   0      4   0.35336    0.13104  2.70   0.70% *** -0.12066    0.09818  1.23  21.91%       
+3   vs   0      5   0.65998    0.09546  6.91   0.00%****  0.19172    0.07224  2.65   0.80% ***   
+3   vs   0      6   0.44820    0.08853  5.06   0.00%**** -0.01563    0.08075  0.19  84.66%       
+3   vs   0      7   0.41595    0.15502  2.68   0.73% *** -0.00937    0.15768  0.06  95.26%       
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+2   vs   1      0   0.15821    0.07455  2.12   3.38%  ** -0.00825    0.06192  0.13  89.39%       
+2   vs   1      1   0.14934    0.06259  2.39   1.70%  ** -0.04161    0.05057  0.82  41.06%       
+2   vs   1      2   0.14892    0.06350  2.35   1.90%  ** -0.02976    0.04525  0.66  51.07%       
+2   vs   1      3   0.21016    0.04891  4.30   0.00%****  0.03148    0.03610  0.87  38.33%       
+2   vs   1      4   0.14947    0.06714  2.23   2.60%  ** -0.00671    0.06072  0.11  91.20%       
+2   vs   1      5   0.19111    0.06170  3.10   0.20% ***  0.01243    0.04655  0.27  78.95%       
+2   vs   1      6   0.16365    0.04697  3.48   0.05%**** -0.01853    0.03537  0.52  60.04%       
+2   vs   1      7   0.19918    0.06596  3.02   0.25% ***  0.05937    0.07581  0.78  43.36%       
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+3   vs   1      0   0.60482    0.08712  6.94   0.00%****  0.03238    0.07415  0.44  66.24%       
+3   vs   1      1   0.57146    0.06969  8.20   0.00%**** -0.00079    0.05324  0.01  98.82%       
+3   vs   1      2   0.53171    0.05782  9.20   0.00%**** -0.04054    0.04834  0.84  40.17%       
+3   vs   1      3   0.44219    0.04572  9.67   0.00%**** -0.13006    0.03958  3.29   0.10% ***   
+3   vs   1      4   0.61193    0.10660  5.74   0.00%****  0.02279    0.08635  0.26  79.18%       
+3   vs   1      5   0.73187    0.09175  7.98   0.00%****  0.14772    0.06779  2.18   2.93%  **   
+3   vs   1      6   0.51258    0.08827  5.81   0.00%**** -0.07064    0.07735  0.91  36.11%       
+3   vs   1      7   0.68743    0.14095  4.88   0.00%****  0.14759    0.15021  0.98  32.59%       
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+3   vs   2      0   0.44662    0.09437  4.73   0.00%****  0.04063    0.08422  0.48  62.95%       
+3   vs   2      1   0.42212    0.05827  7.24   0.00%****  0.04082    0.05046  0.81  41.85%       
+3   vs   2      2   0.38279    0.05772  6.63   0.00%**** -0.01078    0.05098  0.21  83.26%       
+3   vs   2      3   0.23203    0.03690  6.29   0.00%**** -0.16153    0.03911  4.13   0.00%****   
+3   vs   2      4   0.46246    0.09801  4.72   0.00%****  0.02950    0.08425  0.35  72.62%       
+3   vs   2      5   0.54076    0.09905  5.46   0.00%****  0.13529    0.07079  1.91   5.60%   *   
+3   vs   2      6   0.34893    0.08597  4.06   0.00%**** -0.05211    0.07877  0.66  50.82%       
+3   vs   2      7   0.48825    0.13445  3.63   0.03%****  0.08822    0.15542  0.57  57.03%       
+----------------------------------------------------------------------------------------------------
+Shown values of Z may represent the order of the values (starting with 0) instead of the original values.
+----------------------------------------------------------------------------------------------------
+Bootstrap replications: 500
+----------------------------------------------------------------------------------------------------Weights used for comparison with ATE are not truncated. Therefore, GATEs - ATE may not aggregate to 0.
+----------------------------------------------------------------------------------------------------
+
+====================================================================================================
+Descriptives for IATE estimation 
+----------------------------------------------------------------------------------------------------
+Effect: IATE
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Outcome variable: log_gdppc
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Comparison        Mean       Median           Std    Effect > 0  mean(SE)  sig 10%   sig 5%   sig 1%
+1    vs    0     -0.11061     -0.10371      0.10522  12.65%      0.09539   27.79%   18.80%    9.65%
+2    vs    0      0.06510      0.08808      0.12770  73.21%      0.09154   36.11%   28.45%   13.48%
+3    vs    0      0.46208      0.42737      0.15122 100.00%      0.10536   96.84%   96.01%   89.52%
+2    vs    1      0.17571      0.18564      0.06914  98.34%      0.07607   82.53%   71.05%   41.60%
+3    vs    1      0.57269      0.54554      0.11992 100.00%      0.09090  100.00%  100.00%  100.00%
+3    vs    2      0.39698      0.41008      0.12283 100.00%      0.08691   99.83%   98.84%   97.17%
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Weights used for comparison with ATE are not truncated. Therefore, IATEs - ATE may not aggregate to 0.
+----------------------------------------------------------------------------------------------------
+
+Individualized ATE 
+
+Short info on data used:
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 601 entries, 0 to 600
+Data columns (total 24 columns):
+ #   Column                    Non-Null Count  Dtype  
+---  ------                    --------------  -----  
+ 0   log_gdppc_lc0_pot         601 non-null    float64
+ 1   log_gdppc_lc1_pot         601 non-null    float64
+ 2   log_gdppc_lc2_pot         601 non-null    float64
+ 3   log_gdppc_lc3_pot         601 non-null    float64
+ 4   log_gdppc_lc0_pot_se      601 non-null    float64
+ 5   log_gdppc_lc1_pot_se      601 non-null    float64
+ 6   log_gdppc_lc2_pot_se      601 non-null    float64
+ 7   log_gdppc_lc3_pot_se      601 non-null    float64
+ 8   log_gdppc_lc1vs0_iate     601 non-null    float64
+ 9   log_gdppc_lc2vs0_iate     601 non-null    float64
+ 10  log_gdppc_lc3vs0_iate     601 non-null    float64
+ 11  log_gdppc_lc2vs1_iate     601 non-null    float64
+ 12  log_gdppc_lc3vs1_iate     601 non-null    float64
+ 13  log_gdppc_lc3vs2_iate     601 non-null    float64
+ 14  log_gdppc_lc1vs0_iate_se  601 non-null    float64
+ 15  log_gdppc_lc2vs0_iate_se  601 non-null    float64
+ 16  log_gdppc_lc3vs0_iate_se  601 non-null    float64
+ 17  log_gdppc_lc2vs1_iate_se  601 non-null    float64
+ 18  log_gdppc_lc3vs1_iate_se  601 non-null    float64
+ 19  log_gdppc_lc3vs2_iate_se  601 non-null    float64
+ 20  log_gdppc_lc0_un_lc_pot   601 non-null    float64
+ 21  log_gdppc_lc1_un_lc_pot   601 non-null    float64
+ 22  log_gdppc_lc2_un_lc_pot   601 non-null    float64
+ 23  log_gdppc_lc3_un_lc_pot   601 non-null    float64
+dtypes: float64(24)
+memory usage: 112.8 KB
+
+                          count      mean       std       min       25%       50%       75%        max
+log_gdppc_lc0_pot         601.0 -0.091396  0.121455 -0.356212 -0.181335 -0.109437 -0.018895   0.426972
+log_gdppc_lc1_pot         601.0 -0.202004  0.047102 -0.301832 -0.234896 -0.207684 -0.176326  -0.025204
+log_gdppc_lc2_pot         601.0 -0.026295  0.066899 -0.236788 -0.061460 -0.018164  0.017045   0.151989
+log_gdppc_lc3_pot         601.0  0.370682  0.110761  0.172274  0.279009  0.370107  0.463302   0.607212
+log_gdppc_lc0_pot_se      601.0  0.075485  0.025375  0.030940  0.056831  0.069870  0.093946   0.176247
+log_gdppc_lc1_pot_se      601.0  0.056492  0.008404  0.036223  0.051011  0.056648  0.062077   0.085212
+log_gdppc_lc2_pot_se      601.0  0.050209  0.009566  0.025406  0.043158  0.049959  0.056545   0.075755
+log_gdppc_lc3_pot_se      601.0  0.069338  0.025092  0.024626  0.048156  0.064465  0.090224   0.136864
+log_gdppc_lc1vs0_iate     601.0 -0.110608  0.105312 -0.567400 -0.171251 -0.103709 -0.039676   0.171687
+log_gdppc_lc2vs0_iate     601.0  0.065101  0.127803 -0.484179 -0.003936  0.088078  0.164287   0.370611
+log_gdppc_lc3vs0_iate     601.0  0.462078  0.151350  0.016919  0.350857  0.427375  0.583340   0.821698
+log_gdppc_lc2vs1_iate     601.0  0.175709  0.069194 -0.028915  0.139246  0.185638  0.226346   0.341809
+log_gdppc_lc3vs1_iate     601.0  0.572686  0.120024  0.379375  0.474757  0.545544  0.674144   0.846520
+log_gdppc_lc3vs2_iate     601.0  0.396977  0.122931  0.134638  0.298471  0.410075  0.502418   0.632971
+log_gdppc_lc1vs0_iate_se  601.0  0.095388  0.022460  0.049238  0.078316  0.090727  0.112843   0.188959
+log_gdppc_lc2vs0_iate_se  601.0  0.091543  0.023954  0.044587  0.073715  0.087675  0.108093   0.188120
+log_gdppc_lc3vs0_iate_se  601.0  0.105362  0.026020  0.047232  0.088022  0.107854  0.122853   0.193806
+log_gdppc_lc2vs1_iate_se  601.0  0.076073  0.009338  0.049592  0.069770  0.076314  0.082324   0.103153
+log_gdppc_lc3vs1_iate_se  601.0  0.090900  0.020883  0.052320  0.073683  0.086069  0.108321   0.150654
+log_gdppc_lc3vs2_iate_se  601.0  0.086906  0.022291  0.045202  0.069276  0.084101  0.103754   0.147117
+log_gdppc_lc0_un_lc_pot   601.0  8.646311  0.761998  6.878748  8.120728  8.813700  9.240947  10.496463
+log_gdppc_lc1_un_lc_pot   601.0  8.535703  0.707710  6.949707  8.050667  8.727899  9.069123   9.929063
+log_gdppc_lc2_un_lc_pot   601.0  8.711413  0.692759  7.132410  8.244110  8.880981  9.234280  10.115732
+log_gdppc_lc3_un_lc_pot   601.0  9.108389  0.642707  7.632009  8.625616  9.243152  9.599372  10.631190
+
+----------------------------------------------------------------------------------------------------
+Prediction executed at: 2026-03-24 12:25:44.364891
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Data preparation and stats II:                   0:00:00.045934
+Common support:                                  0:00:00.475277
+Local centering (recoding of Y):                 0:00:00.400308
+Weights:                                         0:00:15.458800
+ATEs:                                            0:00:00.223743
+GATEs:                                           0:00:02.091280
+BGATEs:                                          0:00:00.000001
+CBGATEs:                                         0:00:00
+QIATEs:                                          0:00:00.000001
+IATEs:                                           0:00:00.739802
+Balancing test:                                  0:00:00.000002
+
+Total time prediction:                           0:00:19.435208
